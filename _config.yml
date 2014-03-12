@@ -1,0 +1,10 @@
+markdown: rdiscount
+pygments: true
+permalink: /posts/:title
+rdiscount:
+  extensions: [smart]
+
+name: Marius Andreiana
+url: https://mariusa.github.io
+description:
+
