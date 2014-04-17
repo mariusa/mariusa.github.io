@@ -915,7 +915,9 @@ footer .input-group-btn .btn{
 
 
 /* marius */
-
+body {
+  font-size: 1.8rem;
+}
 
 
 .align-right {
@@ -934,3 +936,4 @@ footer .input-group-btn .btn{
   font-family: 'Open Sans';
   font-weight: 700;
 }
+
