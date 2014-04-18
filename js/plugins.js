@@ -41,3 +41,198 @@ this.setting.scrollduration)},keepfixed:function(){var a=jQuery(window),b=a.scro
 this.setting.fadeduration[0]),aux_visible=this.state.isvisible=!0):!1==this.state.shouldvisible&&this.state.isvisible&&(this.$control.stop().animate({opacity:0},this.setting.fadeduration[1]),aux_visible=this.state.isvisible=!1)},init:function(){jQuery(document).ready(function(a){var b=scrolltotop,c=document.all;b.cssfixedsupport=!c||c&&"CSS1Compat"==document.compatMode&&window.XMLHttpRequest;b.$body=window.opera?"CSS1Compat"==document.compatMode?a("html"):a("body"):a("html,body");b.$control=a('<div id="topcontrol">'+
 b.controlHTML+"</div>").css({position:b.cssfixedsupport?"fixed":"absolute",bottom:b.controlattrs.offsety,right:b.controlattrs.offsetx,opacity:0,cursor:"pointer"}).attr({title:"go top"}).click(function(){b.scrollup();return!1}).appendTo("body");document.all&&!window.XMLHttpRequest&&""!=b.$control.text()&&b.$control.css({width:b.$control.width()});b.togglecontrol();a('a[href="'+b.anchorkeyword+'"]').click(function(){b.scrollup();return!1});a(window).bind("scroll resize",function(a){b.togglecontrol()});
 a("#topcontrol").hover(function(){aux_visible&&a(this).animate({opacity:1},500)},function(){aux_visible&&a(this).animate({opacity:0.5},500)})})}};scrolltotop.init();
+
+
+/* myslide http://www.codehandling.com/2013/06/myslide-slideshow-on-your-website-using.html . Hard to relocate images or disable clicks */
+if (null == mySlideWidth || mySlideWidth == "" || mySlideWidth == "undefined") var mySlideWidth = 640;
+if (null == mySlideHeight || mySlideHeight == "" || mySlideHeight == "undefined") var mySlideHeight = 280;
+if (null == mySlideDelay || mySlideDelay == "" || mySlideDelay == "undefined") var mySlideDelay = 3000;
+var mySlideTid;
+var googleUserName = "";
+var googleAlbumId = "";
+if (googleAlbumLink.indexOf("plus.google.com/photos/") != -1) {
+        googleAlbumLink = googleAlbumLink.substring(googleAlbumLink.indexOf("plus.google.com/photos/") + 23);
+        if (googleAlbumLink.indexOf("/") != -1) {
+                googleUserName = googleAlbumLink.substring(0, googleAlbumLink.indexOf("/"));
+                googleAlbumLink = googleAlbumLink.replace(googleUserName + "/albums/", "")
+        }
+        if (googleAlbumLink.indexOf("?") != -1) {
+                googleAlbumId = googleAlbumLink.substring(0, googleAlbumLink.indexOf("?"))
+        } else {
+                googleAlbumId = googleAlbumLink
+        }
+}
+var slideArray = [
+        [],
+        []
+];
+var slideCounter = 0;
+
+function setHeader(xhr) {
+        if (xhr && xhr.overrideMimeType) {
+                xhr.overrideMimeType("application/j-son;charset=UTF-8")
+        }
+}
+
+function getAlbumImages() {
+        var apiPlaylistVideosURL = "https://picasaweb.google.com/data/feed/api/user/" + googleUserName + "/albumid/" + googleAlbumId + "?alt=json-in-script";
+        $.ajax({
+                url: apiPlaylistVideosURL,
+                type: "GET",
+                async: true,
+                cache: true,
+                dataType: 'jsonp',
+                success: function (response) {
+                        setAlbumImagesInSlideArray(response)
+                },
+                error: function (html) {
+                        alert(html)
+                },
+                beforeSend: setHeader
+        })
+}
+
+function setAlbumImagesInSlideArray(response) {
+        var albumArray = response.feed.entry;
+        var picSummary;
+        var picSrc;
+        var picThumbnail;
+        for (var i = 0; i < albumArray.length; i++) {
+                picThumbnail = albumArray[i].media$group.media$thumbnail[0].url;
+                picSummary = albumArray[i].summary.$t;
+                if (picSummary.indexOf("{") != -1 && picSummary.indexOf("}") != -1) {
+                        picSummary = picSummary.substring(picSummary.indexOf("{") + 1, picSummary.indexOf("}"))
+                } else {
+                        picSummary = ""
+                }
+                picSrc = picThumbnail.replace("s72", "s1600");
+                slideArray[0].push(picSrc);
+                slideArray[1].push(picSummary)
+        }
+        loadSlide()
+}
+
+function loadSlide() {
+        $('.slide-show').css({
+                'background-image': 'url(\'' + slideArray[0][slideCounter] + '\')'
+        });
+        $('#slide-show-link').attr('href', slideArray[1][slideCounter]);
+        $(slideArray[0]).each(function (i, v) {
+                if (i == 0) $('#slide').append('<a data-index="' + i + '" class="slide-nav active"></a>');
+                else $('#slide').append('<a data-index="' + i + '" class="slide-nav"></a>')
+        });
+        $('.slide-nav').click(function () {
+                $('.active').removeClass('active');
+                $(this).addClass('active');
+                var index = $(this).attr('data-index');
+                $('.slide-show').animate({
+                        opacity: 0
+                }, 200, function () {
+                        $(this).css({
+                                'background-image': 'url(\'' + slideArray[0][index] + '\')'
+                        });
+                        $('#slide-show-link').attr('href', slideArray[1][index]);
+                        $(this).animate({
+                                opacity: 1
+                        }, 100, function () {})
+                });
+                slideCounter = index
+        });
+        $('.pointer-img').hide();
+        var l_pointer_width = $('.l-pointer').css('width');
+        var l_pointer_height = $('.l-pointer').css('height');
+        $('.l-wrap-to-center').css({
+                'width': l_pointer_width
+        });
+        $('.l-wrap-to-center').css({
+                'height': l_pointer_height
+        });
+        $('.r-wrap-to-center').css({
+                'width': l_pointer_width
+        });
+        $('.r-wrap-to-center').css({
+                'height': l_pointer_height
+        });
+        $('.l-pointer').mouseenter(function () {
+                $('#lpointer-img').show();
+                $('.l-wrap-to-center').css({
+                        'opacity': '0.3'
+                });
+                $('.l-wrap-to-center').css({
+                        'filter': 'alpha(opacity=30)'
+                })
+        });
+        $('.l-pointer').mouseleave(function () {
+                $('#lpointer-img').hide();
+                $('.l-wrap-to-center').css({
+                        'opacity': '0'
+                });
+                $('.l-wrap-to-center').css({
+                        'filter': 'alpha(opacity=0)'
+                })
+        });
+        $('.r-pointer').mouseenter(function () {
+                $('#rpointer-img').show();
+                $('.r-wrap-to-center').css({
+                        'opacity': '0.3'
+                });
+                $('.r-wrap-to-center').css({
+                        'filter': 'alpha(opacity=30)'
+                })
+        });
+        $('.r-pointer').mouseleave(function () {
+                $('#rpointer-img').hide();
+                $('.r-wrap-to-center').css({
+                        'opacity': '0'
+                });
+                $('.r-wrap-to-center').css({
+                        'filter': 'alpha(opacity=0)'
+                })
+        });
+        $('.l-pointer').click(function () {
+                var $slideNav = $('.active').prev('.slide-nav');
+                if ($slideNav.length != 0) $slideNav.click();
+                else $('.slide-nav:last').click();
+                return false
+        });
+        $('.r-pointer').click(function () {
+                var $slideNav = $('.active').next('.slide-nav');
+                if ($slideNav.length) $slideNav.click();
+                else $('.slide-nav:first').click();
+                return false
+        });
+        $('.slide-show').click(function () {
+                var $slideNav = $('.active').next('.slide-nav');
+                if ($slideNav.length) $slideNav.click();
+                else $('.slide-nav:first').click()
+        });
+        $('#slide').mouseenter(function () {
+                abortTimer(mySlideTid)
+        });
+        $('#slide').mouseleave(function () {
+                setMySlideTimer()
+        });
+        setMySlideTimer()
+}
+
+function setMySlideTimer() {
+        mySlideTid = setTimeout(function () {
+                $('.r-pointer').click();
+                setMySlideTimer()
+        }, mySlideDelay)
+}
+
+function abortTimer(tid) {
+        if (null != tid && tid != "undefined" && tid != "") clearTimeout(tid)
+}
+$(document).ready(function () {
+        if (typeof googleAlbumLink == "undefined") {
+          return
+        }
+  //background-image:url('./background.png'); background-image:url('./background.png'); <a id="slide-show-link" href=""></a>
+        var style = "<style>#slide {font-family: Calibri;font-size: 14px;text-align:center;width:" + mySlideWidth + "px;height:" + mySlideHeight + "px;display:inline-block;margin-bottom:50px;border: 1px solid rgb(223, 221, 220);}.slide-show {width:100%;height:100%;background-repeat: no-repeat;background-size: contain;background-position: center center;cursor:pointer;cursor:mouse;}.slide-nav {margin: 10px 4px 10px 0px;background: rgba(101,101,102,.2);-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);border-radius: 5px;width: 10px;height: 10px;display:inline-block;text-indent:-1000px;cursor:pointer;cursor:mouse;}.active {background: rgb(190, 2, 10);background: -webkit-gradient(linear,lefttop,leftbottom,color-stop(0%,rgb(233, 147, 151)),color-stop(24%,rgb(228, 102, 108)),color-stop(100%,rgb(190, 2, 10)));background: -webkit-linear-gradient(top,rgb(233, 147, 151)0%,rgb(228, 102, 108)45%,rgb(190, 2, 10)100%);background: -moz-linear-gradient(top,rgb(233, 147, 151)0%,rgb(228, 102, 108)45%,rgb(190, 2, 10)100%);background: linear-gradient(top,rgb(233, 147, 151)0%,rgb(228, 102, 108)45%,rgb(190, 2, 10)100%);-webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .25);-moz-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .25);box-shadow: inset 0 1px 0 rgba(0, 0, 0, .25);}.l-pointer {width:10%;height:100%;z-index:100;float:left;cursor:hand;cursor:pointer;overflow: hidden;}.r-pointer {width:10%;height:100%;z-index:100;float:right;cursor:hand;cursor:pointer;overflow: hidden;}.pointer-img {}.l-wrap-to-center {display: table-cell;text-align: center;vertical-align: middle;opacity:0;filter:alpha(opacity=0);}.l-wrap-to-center * {vertical-align: middle;}.r-wrap-to-center {display: table-cell;text-align: center;vertical-align: middle;opacity:0;filter:alpha(opacity=0);}.r-wrap-to-center * {vertical-align: middle;}.slide-separator {width:100%;border-top:1px solid #e2e2e2;height:0px;margin-bottom: 15px;}";
+        $('html > head').append(style);
+        $('#slide').append('<div class="slide-show"><div class="l-pointer"><div class="l-wrap-to-center"><span></span><img id="lpointer-img" class="pointer-img" src="./img/lpointer-big.png" /></div></div><div class="r-pointer"><div class="r-wrap-to-center"><span></span><img id="rpointer-img" class="pointer-img" src="./img/rpointer-big.png" /></div></div></div>');
+        getAlbumImages()
+});
+/* end of myslide */

@@ -937,3 +937,6 @@ body {
   font-weight: 700;
 }
 
+#slide {
+  border: 0px !important;
+}

@@ -24,11 +24,23 @@ layout: default
 
         <div class="row">
           <div class="col-sm-8">
-              <embed type="application/x-shockwave-flash" src="https://photos.gstatic.com/media/slideshow.swf" width="600" height="400" flashvars="host=picasaweb.google.com&hl=en_US&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2F108417212761108451708%2Falbumid%2F5626671262050045569%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_US" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+              <!--<embed type="application/x-shockwave-flash" src="https://photos.gstatic.com/media/slideshow.swf" width="600" height="400" flashvars="host=picasaweb.google.com&hl=en_US&feat=flashalbum&RGB=0x000000&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2F108417212761108451708%2Falbumid%2F5626671262050045569%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_US" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>-->
+                <div id="slide"></div>
+
+                <script type="text/javascript">
+                 var googleAlbumLink = "https://plus.google.com/photos/108417212761108451708/albums/5626671262050045569";
+
+                 //optional-----------------------
+                 var mySlideWidth = 600;
+                 var mySlideHeight = 400;
+                 var mySlideDelay = 3000; //delay in milliseconds
+                    document.getElementById('slide').onmousedown = new function() { return false };
+                </script>
+
+
             </div>
           <div class="col-sm-4 col-sm-offset-0">
-             <p>I'm passionate about people, nature, sports, science, software, artificial intelligence and robotics.
-</p>
+             <p>I'm passionate about people, nature, sports, science, software, artificial intelligence and robotics.</p>
               <p>Trying to listen to the sound of growing grass, enjoying the present moment, here and now. Learning to want what I get, rather than getting what I want, and how to be closer to people.
               </p>
 
@@ -126,9 +138,6 @@ layout: default
 
         </div>
         </div>
-
-
-
 
 
 
