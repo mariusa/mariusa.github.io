@@ -927,6 +927,9 @@ body {
   text-align: center;
 }
 
+h1, h2, h3 {
+  color: #423F5C;
+}
 
 .navbar-brand {
 /*  instead of overwriting here, comment these above
@@ -934,7 +937,7 @@ body {
   line-height: 20px !important;*/
 }
 .strong {
-  font-family: 'Open Sans';
+  /*font-family: 'Open Sans';*/
   font-weight: 700;
 }
 
