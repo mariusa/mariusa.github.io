@@ -71,7 +71,7 @@ h1.post-title, h2.post-title{
 
 p {
   margin: 0 0 25px 0;
-  line-height: 23px;
+  /*line-height: 23px;*/
 }
 
 blockquote {
@@ -82,7 +82,7 @@ blockquote {
 
 blockquote p {
   font-size: 15px;
-  line-height: 24px;
+  /*line-height: 24px;*/
 }
 
 .navbar{
@@ -99,8 +99,8 @@ blockquote p {
 
 .navbar-inverse .navbar-brand{
   /*font-family: 'pacificoregular';*/
-  font-size: 30px;
-  line-height: 40px;
+  /*font-size: 30px;
+  line-height: 40px;*/
   color: #FFF;
   padding: 0 15px;
   margin: 8px 0 0px 0;
@@ -916,7 +916,7 @@ footer .input-group-btn .btn{
 
 /* marius */
 body {
-  font-size: 1.8rem;
+  font-size: 18px;
 }
 
 
@@ -929,8 +929,9 @@ body {
 
 
 .navbar-brand {
+/*  instead of overwriting here, comment these above
   font-size: 16px !important;
-  line-height: 20px !important;
+  line-height: 20px !important;*/
 }
 .strong {
   font-family: 'Open Sans';

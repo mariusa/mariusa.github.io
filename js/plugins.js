@@ -43,25 +43,13 @@ b.controlHTML+"</div>").css({position:b.cssfixedsupport?"fixed":"absolute",botto
 a("#topcontrol").hover(function(){aux_visible&&a(this).animate({opacity:1},500)},function(){aux_visible&&a(this).animate({opacity:0.5},500)})})}};scrolltotop.init();
 
 
-/* myslide http://www.codehandling.com/2013/06/myslide-slideshow-on-your-website-using.html . Hard to relocate images or disable clicks */
+/*  crappy, did some fixes... myslide http://www.codehandling.com/2013/06/myslide-slideshow-on-your-website-using.html  */
 if (null == mySlideWidth || mySlideWidth == "" || mySlideWidth == "undefined") var mySlideWidth = 640;
 if (null == mySlideHeight || mySlideHeight == "" || mySlideHeight == "undefined") var mySlideHeight = 280;
 if (null == mySlideDelay || mySlideDelay == "" || mySlideDelay == "undefined") var mySlideDelay = 3000;
 var mySlideTid;
 var googleUserName = "";
 var googleAlbumId = "";
-if (googleAlbumLink.indexOf("plus.google.com/photos/") != -1) {
-        googleAlbumLink = googleAlbumLink.substring(googleAlbumLink.indexOf("plus.google.com/photos/") + 23);
-        if (googleAlbumLink.indexOf("/") != -1) {
-                googleUserName = googleAlbumLink.substring(0, googleAlbumLink.indexOf("/"));
-                googleAlbumLink = googleAlbumLink.replace(googleUserName + "/albums/", "")
-        }
-        if (googleAlbumLink.indexOf("?") != -1) {
-                googleAlbumId = googleAlbumLink.substring(0, googleAlbumLink.indexOf("?"))
-        } else {
-                googleAlbumId = googleAlbumLink
-        }
-}
 var slideArray = [
         [],
         []
@@ -229,6 +217,20 @@ $(document).ready(function () {
         if (typeof googleAlbumLink == "undefined") {
           return
         }
+
+  if (googleAlbumLink.indexOf("plus.google.com/photos/") != -1) {
+        googleAlbumLink = googleAlbumLink.substring(googleAlbumLink.indexOf("plus.google.com/photos/") + 23);
+        if (googleAlbumLink.indexOf("/") != -1) {
+                googleUserName = googleAlbumLink.substring(0, googleAlbumLink.indexOf("/"));
+                googleAlbumLink = googleAlbumLink.replace(googleUserName + "/albums/", "")
+        }
+        if (googleAlbumLink.indexOf("?") != -1) {
+                googleAlbumId = googleAlbumLink.substring(0, googleAlbumLink.indexOf("?"))
+        } else {
+                googleAlbumId = googleAlbumLink
+        }
+}
+
   //background-image:url('./background.png'); background-image:url('./background.png'); <a id="slide-show-link" href=""></a>
         var style = "<style>#slide {font-family: Calibri;font-size: 14px;text-align:center;width:" + mySlideWidth + "px;height:" + mySlideHeight + "px;display:inline-block;margin-bottom:50px;border: 1px solid rgb(223, 221, 220);}.slide-show {width:100%;height:100%;background-repeat: no-repeat;background-size: contain;background-position: center center;cursor:pointer;cursor:mouse;}.slide-nav {margin: 10px 4px 10px 0px;background: rgba(101,101,102,.2);-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35);border-radius: 5px;width: 10px;height: 10px;display:inline-block;text-indent:-1000px;cursor:pointer;cursor:mouse;}.active {background: rgb(190, 2, 10);background: -webkit-gradient(linear,lefttop,leftbottom,color-stop(0%,rgb(233, 147, 151)),color-stop(24%,rgb(228, 102, 108)),color-stop(100%,rgb(190, 2, 10)));background: -webkit-linear-gradient(top,rgb(233, 147, 151)0%,rgb(228, 102, 108)45%,rgb(190, 2, 10)100%);background: -moz-linear-gradient(top,rgb(233, 147, 151)0%,rgb(228, 102, 108)45%,rgb(190, 2, 10)100%);background: linear-gradient(top,rgb(233, 147, 151)0%,rgb(228, 102, 108)45%,rgb(190, 2, 10)100%);-webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .25);-moz-box-shadow: inset 0 1px 0 rgba(0, 0, 0, .25);box-shadow: inset 0 1px 0 rgba(0, 0, 0, .25);}.l-pointer {width:10%;height:100%;z-index:100;float:left;cursor:hand;cursor:pointer;overflow: hidden;}.r-pointer {width:10%;height:100%;z-index:100;float:right;cursor:hand;cursor:pointer;overflow: hidden;}.pointer-img {}.l-wrap-to-center {display: table-cell;text-align: center;vertical-align: middle;opacity:0;filter:alpha(opacity=0);}.l-wrap-to-center * {vertical-align: middle;}.r-wrap-to-center {display: table-cell;text-align: center;vertical-align: middle;opacity:0;filter:alpha(opacity=0);}.r-wrap-to-center * {vertical-align: middle;}.slide-separator {width:100%;border-top:1px solid #e2e2e2;height:0px;margin-bottom: 15px;}";
         $('html > head').append(style);
