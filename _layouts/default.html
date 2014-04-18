@@ -39,7 +39,7 @@
           </button>
 
 
-            <a class="navbar-brand" href="/"><!--<img src="img/icon.png"/>--> <span class="strong">Marius Andreiana</span><br>Product Manager</a>
+            <a class="navbar-brand" href="/"><!--<img src="img/icon.png"/>--> <span class="strong">Marius Andreiana</span><br>Problem Solver / Entrepreneur</a>
 
         </div>
 
@@ -47,13 +47,15 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav navbar-right">
               <li class="{% if page.url == "/index.html" %} active {% endif %}"><a href="/">Business</a></li>
-              <li class="{% if page.url == "/personal.html" %} active {% endif %}"><a href="/personal.html">Personal</a></li>
-              <!--<li class="{% if page.url == "/writings.html" %} active {% endif %}"><a href="/writings.html">Writings</a></li>-->
+              <li class="{% if page.url == "/testimonials.html" %} active {% endif %}"><a href="/testimonials.html">Testimonials</a></li>
               <li class="{% if page.url == "/contact.html" %} active {% endif %}"><a href="/contact.html">Contact</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
     </nav>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <!-- some pages rely on jquery -->
 
   {{ content }}
 
@@ -67,7 +69,6 @@
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/plugins.js"></script>
     <script type="text/javascript" src="/js/banzhow.js"></script>
