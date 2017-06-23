@@ -26,7 +26,7 @@
 
         <hr>
 
-        <p> Have questions or feedback? <a class="support" href="mailto:support@suppleApps.com" target="_blank">support@suppleApps.com</a><br>
+        <p class="help-text"> Have questions or feedback? <a class="support" href="mailto:support@suppleApps.com" target="_blank">support@suppleApps.com</a><br>
             When reporting issues, in order to get back a solution, please always
             <ol>
                 <li>detail what steps you do, what happens and what you'd expected to happen instead</li>
@@ -95,6 +95,9 @@ function utilGetParameterByName(name, query_string) {
                 $("#" + utilGetParameterByName("current")).hide()
                 if (typeof current_app == "string") {
                     $(".support").attr("href", "mailto:support@suppleApps.com?subject=Question%20on%20"  + current_app + "&body=Hi,%0D%0A%0D%0AMy%20shop%20is%20at%20" + utilGetParameterByName("shop") + "%0D%0A%0D%0A")
+                    if (current_app == "Special Offers") {
+                        $(".help-text").remove()
+                    }
                 }
             }
 
