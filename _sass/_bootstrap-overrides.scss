@@ -1,0 +1,50 @@
+.bg-primary {
+  background-color: $primary !important;
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+a {
+  color: $primary;
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($primary, 15%);
+  }
+}
+
+.rounded-circle {
+    object-fit: cover;
+/*    width: 500px;
+    height: 500px;*/
+}
+
+.rounded-circle-cut-square {
+    width: 500px;
+    height: 500px;
+}
+
+img.featured {
+  object-fit: cover;
+  /*object-position: -20% 0;*/
+  width: 100%;
+  height: 200px;
+}
+
+blockquote {
+	font-style: italic;
+    padding: 15px 20px;
+    border-left: 5px solid $primary;;
+    background: #FAFAFA;
+}
+
+#disqus_thread {
+  overflow: hidden;
+
+  iframe {
+    margin-bottom: -54px;
+  }
+}
+

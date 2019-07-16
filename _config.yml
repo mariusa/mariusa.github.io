@@ -1,9 +1,23 @@
-markdown: rdiscount
-permalink: /posts/:title
-rdiscount:
-  extensions: [smart]
-
-name: Marius Andreiana
+title: Marius Andreiana
 url: https://mariusa.github.io
 description: I solve business problems by using technology
+#plugins: [jekyll-admin]
 
+permalink: /articles/:title
+
+sass:
+  sass_dir: _sass
+  style: compact # possible values: nested expanded compact compressed
+
+kramdown:
+  parse_block_html: true
+  toc_levels: 2..4
+  syntax_highlighter: rouge
+
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
